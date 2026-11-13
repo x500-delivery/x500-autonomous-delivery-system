@@ -34,4 +34,6 @@ Run the complete decision flow on a laptop or Jetson with simulated aircraft I/O
 
 The demo should output either a proposed mission and its reasons or a clear rejection. No automatic arming or payload release is needed to demonstrate this software boundary.
 
+A first laptop version is in [`software/package-labels/`](../software/package-labels/README.md) and [`software/companion/`](../software/companion/README.md). It covers label generation and reading, validation, mass mismatch, unknown destinations, wind limits and insufficient battery, using typed-in inputs, fictional sites and a placeholder energy estimate. Stale telemetry, duplicate requests, operator approval and aircraft I/O are not implemented yet.
+
 [Architecture](architecture.md) · [Team responsibilities](team.md) · [Energy model](energy-model.md)

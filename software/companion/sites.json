@@ -1,0 +1,33 @@
+{
+  "note": "Fictional sites and routes for the laptop demo. Distances, headings and limits are invented; they are not surveyed or approved flight routes.",
+  "sites": {
+    "SITE-A": {
+      "name": "Example north pad",
+      "routes": [
+        {
+          "id": "A-open-field",
+          "cruise_altitude_m": 20,
+          "max_wind_mps": 6.0,
+          "legs": [{"distance_m": 400, "heading_deg": 0}]
+        },
+        {
+          "id": "A-sheltered",
+          "cruise_altitude_m": 15,
+          "max_wind_mps": 9.0,
+          "legs": [{"distance_m": 250, "heading_deg": 315}, {"distance_m": 300, "heading_deg": 40}]
+        }
+      ]
+    },
+    "SITE-B": {
+      "name": "Example east pad",
+      "routes": [
+        {
+          "id": "B-direct",
+          "cruise_altitude_m": 20,
+          "max_wind_mps": 6.0,
+          "legs": [{"distance_m": 900, "heading_deg": 90}]
+        }
+      ]
+    }
+  }
+}
