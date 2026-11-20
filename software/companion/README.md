@@ -49,4 +49,23 @@ pip install -r software/package-labels/requirements.txt -r software/companion/re
 python -m unittest discover -s tests -v
 ```
 
-Battery state and the wind estimate are to come from the Pixhawk over MAVLink; that connection is not implemented here.
+## Reading the Pixhawk
+
+`read_pixhawk.py` prints the battery and wind the Pixhawk reports, checks the data is complete, fresh and above a minimum voltage, and prints matching `demo.py` arguments. It does not change the demo. It is a small reference reader alongside Alend's mission-interface work.
+
+It is read-only: it never arms, changes mode or uploads a mission. The only messages it sends ask the Pixhawk to stream `SYS_STATUS`, `BATTERY_STATUS` and `WIND`; `--no-request` skips that.
+
+```bash
+python software/companion/read_pixhawk.py                         # Jetson over USB, /dev/ttyACM0
+python software/companion/read_pixhawk.py --connect COM5          # Windows laptop over USB
+python software/companion/read_pixhawk.py --connect tcp:127.0.0.1:5762   # simulator
+```
+
+| Problem | Fix |
+| --- | --- |
+| No heartbeat | Run `ls /dev/ttyACM*` to find the port; make sure Mission Planner or another program is not using it |
+| Permission denied on the port | `sudo usermod -aG dialout $USER`, then log out and back in |
+| Wind is 0 or not received | ArduPilot estimates wind only while flying; on the bench it is near zero |
+| Remaining % unknown | The battery monitor is not configured or calibrated in ArduPilot |
+
+`telemetry.py` holds the checks and conversions. The usable-energy rule (pack rating × 80 % × remaining %) and the 14.8 V minimum are placeholders until the energy model and battery limits are agreed. Test with the Pixhawk powered and propellers off.
